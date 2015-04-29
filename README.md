@@ -13,6 +13,8 @@ Each next query instead of using limit-offset query type is using the last item'
 ### SimpleIterator ###
 In SimpleIterator the hydration mode is always HYDRATE_OBJECT and the root entity needs to have 'id' field as its primary key.
 ```php
+use Zczapran\Doctrine\ORM\SimpleIterator;
+
 $qb = $em->createQueryBuilder()->select('u')->from('User', 'u');
 $iterator = new SimpleIterator($qb);
 while ($result = $iterator->next()) {
@@ -27,6 +29,8 @@ while ($result = $iterator->next()) {
 Iterator provides more configuration abilities then SimpleIterator. It allows to specify hydration mode and a function
 used to retrieve value of the key (useful for non-standard keys and/or hydration modes other than HYDRATE_OBJECT).
 ```php
+use Zczapran\Doctrine\ORM\Iterator;
+
 $qb = $em->createQueryBuilder()->select('u')->from('User', 'u');
 $pullClosure = function($entity) { return $entity->getId(); };
 
